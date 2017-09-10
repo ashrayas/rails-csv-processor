@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form id="search_form">
+            <div class="card">
+              <div class="card-header text-center">
+                Search Your Data
+              </div>
+              <div class="card-body">
+                  <div class="form-group">
+                    <select class="form-control" name="type" id="type" required> 
+                        <option value="">Select data type</option>
+                        <% 
+                            if !@group_type.blank?
+                              @group_type.each do |v|
+                        %>
+                            <option value="<%= v %>"><%= v %></option>
+                        <% end end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <input class="form-control" type="text" id="id" name="id" placeholder="Input ID">
+                  </div>
+                  <div class="form-group">
+                      <input class="form-control" type="text" id="timestamp" name="timestamp" placeholder="Input timestamp">
+                  </div>              
+              </div>            
+              <div class="card-footer text-muted text-center">
+                <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+                <button type="button" id="back_button" class="btn btn-danger">Back</button> 
+                <button type="submit" id="search_button" class="btn btn-primary">Search</button> 
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+    <hr>
+    <div class="clearfix"></div>
+    <div class="row">
+        <table class="table table-responsive">
+          <thead class="thead-inverse">
+            <tr>
+              <th>#</th>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Timestamp</th>
+              <th>Value</th>
+              <th>Validity</th>
+            </tr>
+          </thead>
+          <tbody id="search_result">
+            <% 
+                if !session[:csv].blank? 
+                    i = 1
+                    session[:csv].each do |v|
+            %>
+            <tr>
+                <th scope="row"><%= i.to_s %></th>
+                <td><%= v['id'] %></td>
+                <td><%= v['type'] %></td>
+                <td><%= v['timestamp'] %></td>
+                <td><%= v['data'] %></td>
+                <td><span class="badge badge-<%= v['validity'] %>"><%= v['validity_message'] %></span></td>
+            </tr>           
+            <% 
+                  i += 1
+                  end 
+              else  
+            %>
+            <tr>
+                <td colspan="5">No data available</td>
+            </tr>
+            <%
+                end 
+            %>
+          </tbody>
+        </table>
+    </div>
+</div>

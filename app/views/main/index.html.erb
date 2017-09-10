@@ -1,0 +1,23 @@
+<form id="csv_form" method="POST" action="/result" enctype="multipart/form-data">
+<div class="container">	
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card text-center">
+				<div class="card-header">
+					CSV Processor
+				</div>
+				<div class="card-body text-center">
+					<div class="form-group">
+						<label>Choose your CSV file:</label>
+						<input class="form-control text-center" type="file" name="csv" id="csv" required>	
+					</div>
+				</div>
+				<div class="card-footer text-muted">
+					<button type="submit" id="submit_button" class="btn btn-primary">Upload</button>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+</form>
