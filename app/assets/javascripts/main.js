@@ -1,8 +1,9 @@
 var csv = '';
 $("#csv").change(function(e) {
     var file = e.target.files[0];
-    var imageType = 'application/vnd.ms-excel';
-    if (file.type.match(imageType)) {
+    var csvType_windows = 'application/vnd.ms-excel';
+    var csvType_mac = 'text/csv';
+    if (file.type.match(csvType_windows) || file.type.match(csvType_mac)) {
         limit = 1500000;
         if(file.size>limit){
             $("#csv").val("");
