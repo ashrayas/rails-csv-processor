@@ -1,7 +1,8 @@
 class MainController < ApplicationController
 
 	def index
-		reset_session
+		# reset_session
+		session[:csv] = nil
 	end
 
 	def result
