@@ -41,7 +41,6 @@ $("#search_form").submit(function(e){
     var datastring = $("#search_form").serialize();
     $.post("/search",datastring,function(result){
         $("#search_result").empty();
-        console.log(result);
         if(result == null || result.length <= 0 ){
             $("#search_result").append("<tr><td colspan='4'>No data found</td></tr>");            
          }else{
